@@ -67,3 +67,33 @@ function validate(value){
     } 
 }
 ```
+### 后测试循环
+```javascript
+var i=values.length -1;
+if (i > -1){
+do {
+    process(values[i]);
+    }while(--i >= 0);
+}
+```
+将终止条件和自减操作符组合成了单个语句，这时，任何进一步的优化只能在 process() 函数中进行了，因为循环部分已经优化完全了。记住使用“后测试”循环时必须确保要处理的值至少有一个。空数组会导致多余的一次循环而“前 测试”循环则可以避免。
+
+```javascript
+var i = 2;
+console.log(--i); // 1,  先执行 i = i - 1，再使用 i 的值
+var j = 2;
+console.log(j--); // 2， 先使用 j 的值，再执行 j = j - 1
+```
+
+### 最小现场更新
+```javascript
+var list = document.getElementById("myList"),
+    fragment = document.createDocumentFragment(),
+    item, i;
+for (i=0; i < 10; i++) {
+    item = document.createElement("li"); 
+    fragment.appendChild(item); 
+    item.appendChild(document.createTextNode("Item " + i));
+}
+list.appendChild(fragment);
+```
