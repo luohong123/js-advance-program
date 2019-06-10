@@ -39,3 +39,17 @@ function sortArray(values){
 ```
 
 - 
+
+### 避免全局量
+var name = "Nicholas";
+变量 name 覆盖了 window.name 属性
+```javascript
+// 一个全局量——推荐 
+var MyApplication = { 
+    name: "Nicholas",
+    sayName: function(){
+        alert(this.name);
+    } 
+};
+```
+
