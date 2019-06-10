@@ -52,4 +52,18 @@ var MyApplication = {
     } 
 };
 ```
-
+### 使用常量
+显示在用户界面上的字符串应该以允许进行语言国际化的方式抽取出来，如 Constants
+URL也应被抽取出来，因为它们有随着应用成长而改变的倾向
+```javascript
+ var Constants = {
+        INVALID_VALUE_MSG: "Invalid value!",
+        INVALID_VALUE_URL: "/errors/invalid.php"
+};
+function validate(value){
+    if (!value){
+        alert(Constants.INVALID_VALUE_MSG);
+        location.href = Constants.INVALID_VALUE_URL;
+    } 
+}
+```
