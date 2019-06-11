@@ -144,6 +144,21 @@ var friend = new Person("Nicholas", 29, "Software Engineer");
 
 # 三、理解继承
 ## （一）原型链
+在理解原型链之前我们需要理解一下什么是指针。
+
+自己使用 proxy 来实现一个原型链吧！加深对原型链的理解，如下代码：
+```javascript
+var obj = Object.create(null);
+function reviewProto(object) {
+    return new Proxy(object, {
+      getPrototypeOf(object) {
+        return proto;
+      }
+  });
+}
+console.dir(reviewProto(obj));
+
+```
 
 ## （二）借用构造函数继承
 
