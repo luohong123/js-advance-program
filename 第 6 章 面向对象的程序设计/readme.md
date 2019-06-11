@@ -39,13 +39,34 @@ function createPerson(name, age, job){
 }
     var person1 = createPerson("Nicholas", 29, "Software Engineer");
     var person2 = createPerson("Greg", 27, "Doctor");
+    alert(Object.prototype.toString.call(person1)); // [object Object]
 ```
 - 优点
 可以无数次的调用这个函数，创建了多个相似对象的问题
 - 缺点
 没有解决对象识别的问题，不知道一个对象的类型
-## （二）
+## （二）构造函数模式
 
+## （三）原型模式
 
+## （四）组合使用构造函数模式和原型模式
+
+## （五）动态原型模式
+
+## （六）寄生构造函数模式
+
+## （七）稳妥构造函数模式
 ##
 # 三、理解继承
+
+## （一）原型链
+
+## （二）借用构造函数继承
+
+## （三）组合式继承
+
+## （四）原型式继承
+
+## （五）寄生式继承
+
+## （六）寄生组合式模式
