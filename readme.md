@@ -12,4 +12,5 @@
 
 
 # 预览
-<img src="https://github.com/luohong123/js-advance-program/tree/master/%E7%AC%AC%2024%20%E7%AB%A0%20%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" / >
+
+<img src="https://github.com/luohong123/js-advance-program/blob/master/%E7%AC%AC%2024%20%E7%AB%A0%20%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/%E7%AC%AC%2024%20%E7%AB%A0%20%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.png"  />
