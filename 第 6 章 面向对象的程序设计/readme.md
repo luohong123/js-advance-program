@@ -147,6 +147,7 @@ var friend = new Person("Nicholas", 29, "Software Engineer");
 在理解原型链之前我们需要理解一下什么是指针。
 
 自己使用 proxy 来实现一个原型链吧！加深对原型链的理解，如下代码：
+这个是最初级的实现方式：
 ```javascript
 var obj = Object.create(null);
 function reviewProto(object) {
@@ -158,6 +159,28 @@ function reviewProto(object) {
 }
 console.dir(reviewProto(obj));
 
+```
+下面是另一个版本的实现，通过Object.assign 把传人的构造函数 放到一个Object.create(null) 里面，这个里面没有原生的原型，如果构造函数里面本身有的属性 就直接去本身找，如果本身没有，定义重写对象的属性（类似深拷贝），去重写的原型里面去找
+```javascript
+function _new(constructor) {
+  return new Proxy(Object.assign(Object.create(null), new constructor),{
+    get(target, key) {
+      if(key in target) {
+        return target[key];
+      } else {
+        const reviewProto =  constructor.reviewProto || Object.create(null);
+        return reviewProto[key];
+      }
+    }
+  })
+}
+
+function aaa() {
+  this.a = 1;
+}
+var obj = _new(aaa);
+obj.reviewProto = {b:2};
+console.dir(obj);
 ```
 
 ## （二）借用构造函数继承
