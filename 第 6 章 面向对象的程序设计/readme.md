@@ -184,7 +184,20 @@ console.dir(obj);
 ```
 
 ## （二）借用构造函数继承
+```javascript
+function parentType(name, age) {
+  this.name = name;
+  this.age = age;
+}
+function sonType() {
+  parentType.call(this,'honghong',18); // 通过调用父构造函数的 call 方法来实现继承
+  this.age = 20; // 覆盖了父级的 age 属性
+}
+var instance = new sonType();
+console.log(instance.name); // 'honghong'
+console.log(instance.age); // 20 
 
+```
 -  优点
 
 - 缺点
