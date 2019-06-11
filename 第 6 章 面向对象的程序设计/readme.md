@@ -85,11 +85,48 @@ alert(person1.friends === person2.friends);  //true
 ```
 由于共享的本质，修改了 person1.friends 引用的数组，向数组中添加了一个字符 串，导致person2.friends共享了prototype中的friends属性，值也被修改了。
 ## （四）组合使用构造函数模式和原型模式
+```javascript
+function Person(name, age, job){
+  // 在构造函数中定义实例的属性
+  this.name = name; 
+  this.age = age;
+  this.job = job;
+  this.friends = ["Shelby", "Court"];
+}
+Person.prototype = {
+    constructor : Person, // 在原型中定义实例共享的属性 constructor
+    sayName : function(){
+        alert(this.name);
+    }
+}
+var person1 = new Person("Nicholas", 29, "Software Engineer");
+var person2 = new Person("Greg", 27, "Doctor");
+person1.friends.push("Van");
+alert(person1.friends);    // "Shelby,Count,Van"
+alert(person2.friends);    // "Shelby,Count"
+alert(person1.friends === person2.friends); // false
+alert(person1.sayName === person2.sayName); // true
+```
 -  优点
 
 - 缺点
 
 ## （五）动态原型模式
+```javascript
+function Person(name, age, job){
+  //属性
+  this.name = name; this.age = age; this.job = job;
+  // 方法
+  if (typeof this.sayName != "function"){ // 检查初始化之后应该存在的任何属性或方法,检查其中一个即可
+      Person.prototype.sayName = function(){
+          alert(this.name);
+      }; 
+  }
+}
+var friend = new Person("Nicholas", 29, "Software Engineer");
+    friend.sayName();
+```
+> 注意： 使用动态原型模式时，不能使用对象字面量重写原型。如果在已经创建了实例的情况下重写原型，那么就会切断现有实例与新原型之间的联系。
 -  优点
 
 - 缺点
