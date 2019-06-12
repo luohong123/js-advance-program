@@ -1,5 +1,6 @@
 
 # 第 6 章 面向对象的程序设计
+<img src="https://github.com/luohong123/js-advance-program/blob/master/%E7%AC%AC%206%20%E7%AB%A0%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E7%AC%AC%206%20%E7%AB%A0%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1.png" />
 
 # 一、理解对象属性
 ## （一）属性类型
@@ -203,19 +204,91 @@ console.log(instance.age); // 20
 - 缺点
 
 ## （三）组合式继承
+```javscript
+function Parent(name) {
+  this.name = name;
+  this.colors = ['red', 'blue','black'];
+}
+function Son(name,age) {
+  Parent.call(this,name); // 第二次调用Parent()构造函数，创建了name和colors属性，屏蔽了原型中的两个同名属性。
+  this.age = age;
+}
+Son.prototype = new Parent(); // 第一次调用Parent()，将 Parent 的实例赋给 Son 的原型,此时 Son 的 construtor 指向父级的实例
+Son.prototype.constructor = Son; // 把constructor 重新指回自己
+Son.prototype.sayAge = function() { // 在该新原型 上定义了方法 sayAge()
+  console.log('我的年龄是: '+this.age);
+}
+
+var instance1  = new Son('honghong',18);
+instance1.colors.push('gray');
+console.log(instance1.colors); // ["red", "blue", "black", "gray"]
+console.log(instance1.name); // honghong
+console.log(instance1.age); // 18
+console.log(instance1.sayAge()); // 我的年龄是: 18
+var instance2 = new Son('qingcheng',10);
+console.log(instance2.colors); // ["red", "blue", "black"]
+console.log(instance2.name); // qingcheng
+console.log(instance2.age); // 10
+console.log(instance2.sayAge()); // 我的年龄是: 10
+console.dir(Son);
+```
 
 -  优点
-
+继承父级的全部实例属性，同时通过原型可以共享和复用方法
 - 缺点
+超过两次调用超类型构造函数，一次是创建子类型原型的时候，一次是在子类型构造函数内部。
+子类型最终会包含超类型对象的全部实例属性，但我们不得不在调用子类型构造函数时重写这些属性。
 
 ## （四）原型式继承
+ECMAScript5通过Object.create()规范化了原型式继承
+```javascript
+var person = {
+    name: "Nicholas",
+    friends: ["Shelby", "Court", "Van"]
+};
+var anotherPerson = Object.create(person);
+anotherPerson.name = "Greg";
+anotherPerson.friends.push("Rob");
+var yetAnotherPerson = Object.create(person);
+yetAnotherPerson.name = "Linda";
+yetAnotherPerson.friends.push("Barbie");
+alert(person.friends); //"Shelby,Court,Van,Rob,Barbie"
+```
 
 -  优点
 
 - 缺点
 
-## （五）寄生式继承
+- 适用场景
+只想让一个对象与另一个对象保持类似的情况下
 
+## （五）寄生式继承
+通过借用构造函数来继承属性，通过原型链的混成形式来继承方法
+- 实现思路
+不必为了指定子类型的原型而调用超类型的构造函数，我们所需要的无非就是超类型 原型的一个副本而已。
+使用寄生式继承来继承超类型的原型，然后再将结果指定给子类型的原型。
+```javascript
+function inheritPrototype(subType, superType){
+    var prototype = object(superType.prototype);
+    prototype.constructor = subType;
+    subType.prototype = prototype;
+}
+function SuperType(name){
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+}
+SuperType.prototype.sayName = function(){
+    alert(this.name);
+};
+function SubType(name, age){
+    SuperType.call(this, name);
+    this.age = age;
+}
+inheritPrototype(SubType, SuperType);
+SubType.prototype.sayAge = function(){
+    alert(this.age);
+    }
+```
 -  优点
 
 - 缺点
