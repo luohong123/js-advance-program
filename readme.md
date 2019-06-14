@@ -13,7 +13,7 @@
 【一刷高程】打上勾的是已完成的：
 - [ ] [【第 1 章 JavaScript简介】]()
 - [ ] [【第 2 章 在HTML中使用JavaScript】]()
-- [ ] [【第 3 章 基本概念】]()
+- [x] [【第 3 章 基本概念】](https://github.com/luohong123/js-advance-program/tree/master/%E7%AC%AC%203%20%E7%AB%A0%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5)
 - [x] [【第 4 章 变量、作用域和内存问题】](https://github.com/luohong123/js-advance-program/blob/master/%E7%AC%AC%204%20%E7%AB%A0%20%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/readme.md)
 - [ ] [【第 5 章 引用类型】]()
 - [x] [【第 6 章 面向对象的程序设计】](https://github.com/luohong123/js-advance-program/tree/master/%E7%AC%AC%206%20%E7%AB%A0%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)
